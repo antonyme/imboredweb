@@ -5,15 +5,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<form action="#" th:action="@{/date}" th:object="${date}"
-		method="post">
+	<form action="#" th:action="@{/date}" th:object="${date}" method="post">
 		<p>
-			Date: <input type="text" th:field="*{content}" />
+			Date: <input id="lat" type="hidden" th:field="*{content}" />
 		</p>
 		<p>
 			<input type="submit" value="Submit" /> <input type="reset"
 				value="Reset" />
 		</p>
 	</form>
+	<button id="set">Set</button>
+	<script>
+		document.getElementById("set").addEventListener("click", function() {
+			document.getElementById("lat").value = 15;
+		});
+	</script>
 </body>
 </html>

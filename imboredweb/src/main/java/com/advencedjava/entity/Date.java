@@ -1,19 +1,19 @@
 package com.advencedjava.entity;
 
 public class Date {
-	private String content;
+	private int content;
 
 	public Date() {}
 	
-	public Date(String content) {
+	public Date(int content) {
 		this.content = content;
 	}
 
-	public String getContent() {
+	public int getContent() {
 		return content;
 	}
 
-	public void setContent(String content) {
+	public void setContent(int content) {
 		this.content = content;
 	}
 	

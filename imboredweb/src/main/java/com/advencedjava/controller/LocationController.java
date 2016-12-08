@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.advencedjava.entity.Date;
+import com.advencedjava.entity.Location;
 
 @Controller
-public class DateController {
-	@GetMapping(value="/date")
-	public String date(Model model) {
-		model.addAttribute("date", new Date());
-		return "date";
+public class LocationController {
+	@GetMapping("/location")
+	public String location(Model model) {
+		model.addAttribute("location", new Location());
+		return "location";
 	}
 	
-	@PostMapping(value="/date")
-	public String date(@ModelAttribute("date") Date date) {
-		System.out.println(date.getContent());
+	@PostMapping
+	public String location(@ModelAttribute("location") Location location) {
+		System.out.println(location.getLat());
 		return "home";
 	}
 }
