@@ -73,91 +73,137 @@ html, body {
 		<form th:action="@{/location}" th:object="${location}" method="post">
 			<input id="lat" type="hidden" th:field="*{lat}" /> <input id="lng"
 				type="hidden" th:field="*{lng}" />
-			<button type="submit">Valider</button>
+			<button id="submitBtn" type="submit" disabled="disabled">Valider</button>
 		</form>
 	</div>
 
 
 	<script>
-// Here we add a search box to a map, using the Google Place Autocomplete
-// feature. People can enter geographical searches. The search box will return a
-// pick list containing a mix of places and predicted search terms.
+		// Here we add a search box to a map, using the Google Place Autocomplete
+		// feature. People can enter geographical searches. The search box will return a
+		// pick list containing a mix of places and predicted search terms.
+		var map;
+		var markers;
+		var clickMarker;
+		var searchBox;
+		function initAutocomplete() {
+			map = new google.maps.Map(document.getElementById('map'), {
+				center : {
+					lat : -33.8688,
+					lng : 151.2195
+				},
+				zoom : 13,
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			});
 
-function initAutocomplete() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -33.8688, lng: 151.2195},
-    zoom: 13,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
+			// Create the search box and link it to the UI element.
+			var input = document.getElementById('pac-input');
+			searchBox = new google.maps.places.SearchBox(input);
+			map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+			
+			//Listen to a click on the map, place a marker and set location
+			map.addListener('click', function(e) {
+				mapClicked(e.latLng);
+			});
 
-  // Create the search box and link it to the UI element.
-  var input = document.getElementById('pac-input');
-  var searchBox = new google.maps.places.SearchBox(input);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+			// Bias the SearchBox results towards current map's viewport.
+			map.addListener('bounds_changed', function() {
+				searchBox.setBounds(map.getBounds());
+			});
 
-  // Bias the SearchBox results towards current map's viewport.
-  map.addListener('bounds_changed', function() {
-    searchBox.setBounds(map.getBounds());
-  });
-
-  var markers = [];
-  // Listen for the event fired when the user selects a prediction and retrieve
-  // more details for that place.
-  searchBox.addListener('places_changed', function() {placesChanged(searchBox, markers, map)});
-}
-
-function placesChanged(searchBox, markers, map) {
-	var places = searchBox.getPlaces();
-
-	if (places.length == 0) {
-		return;
-	}
-
-	// Clear out the old markers.
-	markers.forEach(function(marker) {
-		marker.setMap(null);
-	});
-	markers = [];
-
-	// For each place, get the icon, name and location.
-	var bounds = new google.maps.LatLngBounds();
-	places.forEach(function(place) {
-		var icon = {
-				url: place.icon,
-				size: new google.maps.Size(71, 71),
-				origin: new google.maps.Point(0, 0),
-				anchor: new google.maps.Point(17, 34),
-				scaledSize: new google.maps.Size(25, 25)
-		};
-
-		// Create a marker for each place.
-		var marker = new google.maps.Marker({
-			map: map,
-			icon: icon,
-			title: place.name,
-			position: place.geometry.location
-		});
-		google.maps.event.addListener(marker, 'click', function() {setLocation(marker)})
-		markers.push(marker);
-
-		if (place.geometry.viewport) {
-			// Only geocodes have viewport.
-			bounds.union(place.geometry.viewport);
-		} else {
-			bounds.extend(place.geometry.location);
+			markers = new Array();
+			// Listen for the event fired when the user selects a prediction and retrieve
+			// more details for that place.
+			searchBox.addListener('places_changed', placesChanged);
 		}
-	});
-	map.fitBounds(bounds);
-}
 
-function setLocation(marker) {
-	console.log(marker.getPosition().lat());
-	document.getElementById("lat").value = marker.getPosition().lat();
-	document.getElementById("lng").value = marker.getPosition().lng();
-}
+		function placesChanged() {
+			var places = searchBox.getPlaces();
 
+			if (places.length == 0) {
+				return;
+			}
+			// Clear out the old markers.
+			if(clickMarker != null) {
+				clickMarker.setMap(null);
+			}
+			markers.forEach(function(marker) {
+				marker.setMap(null);
+			});
+			markers = [];
+			
+			//disable submit button
+			document.getElementById("submitBtn").disabled = true;
 
-    </script>
+			// For each place, get the icon, name and location.
+			var bounds = new google.maps.LatLngBounds();
+			places.forEach(function(place) {
+				var icon = {
+					url : place.icon,
+					size : new google.maps.Size(71, 71),
+					origin : new google.maps.Point(0, 0),
+					anchor : new google.maps.Point(17, 34),
+					scaledSize : new google.maps.Size(25, 25)
+				};
+
+				// Create a marker for each place.
+				var marker = new google.maps.Marker({
+					map : map,
+					icon : icon,
+					title : place.name,
+					position : place.geometry.location
+				});
+				google.maps.event.addListener(marker, 'click', function() {
+					markerClicked(marker)
+				})
+				markers.push(marker);
+
+				if (place.geometry.viewport) {
+					// Only geocodes have viewport.
+					bounds.union(place.geometry.viewport);
+				} else {
+					bounds.extend(place.geometry.location);
+				}
+			});
+			map.fitBounds(bounds);
+		}
+		
+		function mapClicked(position) {
+			//stop any animated marker
+			if(clickMarker != null) {
+				clickMarker.setMap(null);
+			}
+			markers.forEach(function(marker) {
+				marker.setAnimation(null);
+			})
+			
+			clickMarker = new google.maps.Marker({
+				map : map,
+				animation : google.maps.Animation.BOUNCE,
+				position : position
+			});
+			setPosition(position);
+			
+		}
+
+		function markerClicked(marker) {
+			//stop any animated marker
+			if(clickMarker != null) {
+				clickMarker.setMap(null);
+			}
+			markers.forEach(function(marker) {
+				marker.setAnimation(null);
+			})
+			setPosition(marker.getPosition());
+		    marker.setAnimation(google.maps.Animation.BOUNCE);
+		}
+		
+		function setPosition(position) {
+			document.getElementById("lat").value = position.lat();
+			document.getElementById("lng").value = position.lng();
+			document.getElementById("submitBtn").disabled = false;
+		}
+	</script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;callback=initAutocomplete&amp;key=AIzaSyBt74Hr5wZkB7oafjj6fYprlGnRJ4TZd8c"></script>
 </body>
