@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.advencedjava.entity.Date;
+import com.advencedjava.entity.DateTime;
 import com.advencedjava.entity.Location;
 
 @Controller
@@ -20,13 +20,13 @@ public class DateLocController {
 
 	@GetMapping(value="/date")
 	public String date(Model model) {
-		model.addAttribute("date", new Date());
+		model.addAttribute("date", new DateTime());
 		return "date";
 	}
 	
 	@PostMapping(value="/date")
-	public String date(@ModelAttribute("date") Date date) {
-		System.out.println(date.getContent());
+	public String date(@ModelAttribute("date") DateTime date) {
+		System.out.println(date.getDate().toString());
 		return "redirect:/location";
 	}
 

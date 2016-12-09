@@ -71,8 +71,8 @@ html, body {
 	<div id="map"></div>
 	<div id="bottom">
 		<form th:action="@{/location}" th:object="${location}" method="post">
-			<input id="lat" type="hidden" th:field="*{lat}" /> <input id="lng"
-				type="hidden" th:field="*{lng}" />
+			<input id="lat" type="hidden" th:field="*{lat}" />
+			<input id="lng"	type="hidden" th:field="*{lng}" />
 			<button id="submitBtn" type="submit" disabled="disabled">Valider</button>
 		</form>
 	</div>
