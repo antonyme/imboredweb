@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class DateTime {
-	@DateTimeFormat(pattern="dd-MMM-YYYY")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date date;
 	
 	public DateTime() {}
