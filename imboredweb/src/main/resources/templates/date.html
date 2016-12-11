@@ -3,16 +3,60 @@
 <head>
 <title>I'm bored</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+body{
+    background-image: url('http://imageshack.com/a/img922/1593/tigV4g.jpg');
+    no-repeat center center fixed;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+ text-align: center;
+ }
+ #date_a{
+ padding-top: 5em; 
+ }
+ #button{
+ background-color: rgb(101,170,83);
+border-width: thin ;
+border-top-color: rgb(140,193,128);
+  border-right-color: rgb(140,193,128);
+  border-bottom-color: rgb(140,193,128);
+  border-left-color: rgb(140,193,128);
+  color: white;
+    border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  width:100px;
+  height:33px;
+  }
+  
+  #date_a{
+  color: white;
+ font-family:klavika,arial;
+ }
+  #text{
+      color: white;
+ font-family:klavika,arial;
+    margin-top: 2em;
+    font-size: 70px;
+     }
+    
+</style>
 </head>
 <body>
-	<form action="#" th:action="@{/date}" th:object="${date}" method="post">
+<div id="text">
+	<p> When do you want to have fun?</p>
+	</div>
+	<form id="date_a" action="#" th:action="@{/date}" th:object="${date}" method="post">
 		<p>
-			Date: <input type="date" th:field="*{date}" />
+			Date: <input type="date" th:field="*{date}" STYLE="color:black"/>
 			
 		</p>
 		<p>
-			<input type="submit" value="Submit" /> <input type="reset"
-				value="Reset" />
+			<input id="button" type="submit" value="Submit" /> 
+			
 		</p>
 	</form>
 </body>
