@@ -3,13 +3,31 @@
 <head>
 <title>I'm bored</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+html, body {
+	height: 100%;
+	margin: 10px 10px 10px 10px;
+	padding: 0;
+}
+
+#map {
+	height: 90%;
+	margin: 60;
+}
+</style>
 </head>
 <body>
-<div style="float:left; width:70%;">
-Left  <!-- Set Div As your requirement -->
-</div>
-<div style="float:left; width:30%;">
-Right  <!-- Set Div As your requirement -->
-</div>
+	<div id="map" style="float: left; width: 70%;"></div>
+	<div style="float: left; width: 30%;">
+		<h1 id="title"></h1>
+		<img id="image" src="" alt="W3Schools.com"/>
+		<h2 id="placename"></h2>
+		<p id="description"></p>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="eventsScript.js"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;callback=initMap&amp;key=AIzaSyBt74Hr5wZkB7oafjj6fYprlGnRJ4TZd8c"></script>
 </body>
 </html>
+

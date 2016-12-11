@@ -1,12 +1,12 @@
 package com.advencedjava.entity;
 
-public class Location {
+public class UserLocation {
 	private double lat;
 	private double lng;
 	
-	public Location() {}
+	public UserLocation() {}
 	
-	public Location(double lat, double lng) {
+	public UserLocation(double lat, double lng) {
 		super();
 		this.lat = lat;
 		this.lng = lng;
