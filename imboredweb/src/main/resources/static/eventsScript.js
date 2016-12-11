@@ -38,10 +38,12 @@ function createEventMarkers(data) {
 }
 
 function markerClicked(eventInfo) {
+	document.getElementById("detail").style.display="block";
 	document.getElementById("title").innerHTML = eventInfo.title;
 	document.getElementById("image").src = eventInfo.image;
 	document.getElementById("placename").innerHTML = eventInfo.placeName;
 	document.getElementById("description").innerHTML = eventInfo.description;
+	document.getElementById("eventuid").value = eventInfo.eventUid;
 }
 
 function isMarked(lat, lng) {

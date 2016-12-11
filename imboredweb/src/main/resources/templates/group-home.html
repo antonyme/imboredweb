@@ -1,42 +1,17 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>I'm bored - The  new social network who can help you to have fun !</title>
+    <title>I'm bored</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	 <style type="text/css">
-  body {
-    color: purple;
-    background-image: url('http://www.pixelstalk.net/wp-content/uploads/2016/06/Facebook-Backgrounds-HD.jpg');
-    no-repeat center center fixed;
- -webkit-background-size: cover;
- -moz-background-size: cover;
- -o-background-size: cover;
- background-size: cover;
- text-align: center;
- font-size:30px;
- color: white;
- font-family:klavika,arial;
-    }
-    
-    #fb-root{
-    
-    padding-top: 2em; }
-  
-  #text{
-    
-    margin-top: 2em; }
-    
-  #logo{
-      color: white;
- font-family:klavika,arial;
-    margin-top: 2em;
-    font-size: 115px;
-     }
-
-  </style>
 </head>
-
-<script>
+<body>
+	<div id="fb-root"></div>
+	
+	<form id="form" th:action="@{/group/home}" th:object="${user}" method="post">
+		<input id="id" type="hidden" th:field="*{fbId}" />
+		<input id="name" type="hidden" th:field="*{name}" />
+	</form>
+	<script>
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId : '556578897875108',
@@ -73,21 +48,6 @@
 		}
 	</script>
 
-<body>
-	<form id="form" th:action="@{/home}" th:object="${user}" method="post">
-		<input id="id" type="hidden" th:field="*{fbId}" />
-		<input id="name" type="hidden" th:field="*{name}" />
-	</form>
-    <div id="logo"><p> I'm bored®</p></div>
-    
-	<div id="text">
-	<p> Log in and search events near from you to have fun!</p>
-	</div>
-	
-	<div id="fb-root"></div>
-
 	<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
-
-
 </body>
 </html>

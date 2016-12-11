@@ -18,11 +18,15 @@ html, body {
 </head>
 <body>
 	<div id="map" style="float: left; width: 70%;"></div>
-	<div style="float: left; width: 30%;">
+	<div id="detail" style="float: left; width: 30%; display: none">
 		<h1 id="title"></h1>
 		<img id="image" src="" alt="W3Schools.com"/>
 		<h2 id="placename"></h2>
 		<p id="description"></p>
+		<form th:action="@{/events}" th:object="${eventInfo}" method="post">
+			<input id="eventuid" type="hidden" th:field="*{eventUid}" />
+			<button id="submitBtn" type="submit">Valider</button>
+		</form>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="eventsScript.js"></script>
