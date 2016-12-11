@@ -7,7 +7,7 @@
 <body>
 	<div id="fb-root"></div>
 	
-	<form id="form" th:action="@{/home}" th:object="${user}" method="post">
+	<form id="form" th:action="@{/group/home}" th:object="${user}" method="post">
 		<input id="id" type="hidden" th:field="*{fbId}" />
 		<input id="name" type="hidden" th:field="*{name}" />
 	</form>

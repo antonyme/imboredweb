@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>I'm bored</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Liste des participants</h1>
+	<table>
+		<tr th:each="user : ${users}">
+			<td th:text="${user.name}">Name</td>
+		</tr>
+	</table>
+	<h2>URL to share</h2>
+	<a th:href="${url}" th:text="${url}">link</a>
+</body>
+</html>
