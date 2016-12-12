@@ -4,23 +4,48 @@
 <title>I'm bored</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <style>
-body{
-color: white;
-    font-family:klavika,arial;
-    margin-top: 0px;
-    font-size: 20px;
-background-color: rgb(30,126,174);
+body {
+	height: 100%;
+	width: 100%;
+	color: white;
+	font-family: klavika, arial;
+	margin-top: 0px;
+	font-size: 20px;
+	background-color: rgb(30, 126, 174);
+}
+#detail, #clients {
+	height: 100;
+	float: left;
+	overflow: auto;
+	color: white;
+	font-family: klavika, arial;
+	margin-top: 0px;
+	font-size: 20px;
+}
+
+#image {
+	max-width: 92%;
+	max-height: auto;
+	margin-right: 10px;
 }
 </style>
 </head>
 <body>
-	<h1>Liste des participants</h1>
-	<table>
-		<tr th:each="user : ${users}">
-			<td th:text="${user.name}">Name</td>
-		</tr>
-	</table>
-	<h2>URL to share</h2>
-	<a th:href="${url}" th:text="${url}">link</a>
+	<div id="clients" style="width: 70%">
+		<h1>Liste des participants</h1>
+		<table>
+			<tr th:each="user : ${users}">
+				<td th:text="${user.name}">Name</td>
+			</tr>
+		</table>
+		<h2>URL to share</h2>
+		<a th:href="${url}" th:text="${url}">link</a>
+	</div>
+	<div id="detail" style="width: 30%">
+		<h2 id="title" th:text="${event.title}"></h2>
+		<img id="image" th:src="${event.image}" alt="" />
+		<h3 id="placename" th:text="${event.placeName}"></h3>
+		<p id="description" th:text="${event.description}"></p>
+	</div>
 </body>
 </html>

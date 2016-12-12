@@ -8,9 +8,9 @@ import com.advencedjava.entity.EventInfo;
 import com.advencedjava.entity.User;
 
 public class GroupController {
-	EventInfo eventInfo;
-	UUID uid;
-	List<User> userList = new ArrayList<>();
+	private EventInfo eventInfo;
+	private UUID uid;
+	private List<User> userList = new ArrayList<>();
 	
 	public GroupController() {}
 	
@@ -32,5 +32,13 @@ public class GroupController {
 
 	public void setUid(UUID uid) {
 		this.uid = uid;
+	}
+
+	public EventInfo getEventInfo() {
+		return eventInfo;
+	}
+
+	public void setEventInfo(EventInfo eventInfo) {
+		this.eventInfo = eventInfo;
 	}
 }
