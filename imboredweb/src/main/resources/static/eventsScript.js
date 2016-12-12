@@ -50,6 +50,7 @@ function markerClicked(eventInfo) {
 	document.getElementById("description").innerHTML = eventInfo.description;
 	document.getElementById("description_long").innerHTML = eventInfo.freeText;
 	document.getElementById("address").innerHTML = eventInfo.address;
+	document.getElementById("date").innerHTML = eventInfo.startDate;
     
 	document.getElementById("eventuid").value = eventInfo.eventUid;
 }

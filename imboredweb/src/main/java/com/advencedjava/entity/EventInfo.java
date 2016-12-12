@@ -107,8 +107,10 @@ public class EventInfo {
 		this.lng = lng;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+	public String getStartDate() {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		String result = formatter.format(startDate);
+		return result;
 	}
 
 	public void setStartDate(Date startDate) {
@@ -152,9 +154,10 @@ public class EventInfo {
 			this.lng = Double.parseDouble(jsonData.getLocations().get(0).getLongitude());
 			
 			//needed
-			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy/hh:mm:ss");
-			this.startDate = formatter.parse(jsonData.getLocations().get(0).getDates().get(0).getDate() + "/"
-					+ jsonData.getLocations().get(0).getDates().get(0).getTimeStart());
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd/hh:mm:ss");
+			String toParse = jsonData.getLocations().get(0).getDates().get(0).getDate() + "/"
+					+ jsonData.getLocations().get(0).getDates().get(0).getTimeStart();
+			this.startDate = formatter.parse(toParse);
 			
 			return true;
 		} catch (Exception e) {
