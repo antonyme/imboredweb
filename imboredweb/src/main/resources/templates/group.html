@@ -4,56 +4,64 @@
 <title>I'm bored</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <style>
-body{
-background-color: rgb(30,126,174);
-    color: white;
-    font-family:klavika,arial;
-    margin-top: 0px;
-    font-size: 20px;
-
-
+body {
+	height: 100%;
+	width: 100%; color : white;
+	font-family: klavika, arial;
+	margin-top: 0px;
+	font-size: 20px;
+	background-color: rgb(30, 126, 174);
+	color: white;
 }
-#title{
-margin-top: 10px;
-height: 60%;
-border-width: medium;
-		border-style: solid;
-		border-color: rgb(59,89,152);
-		}
-		
-		#share{
-		margin-top: 5px;
-margin-right: 5px;
-margin-bottom: 10px;
-width:20%;
- background-color: rgb(101,170,83);
-border-width: 30px ;
-border-top-color: rgb(255,255,255);
-  border-right-color: rgb(255,255,255);
-  border-bottom-color: rgb(140,193,128);
-  border-left-color: rgb(140,193,128);
-  }
- 
-  #text{
-  margin-left: 10px;
-  }
+
+#detail, #clients {
+	height: 100;
+	float: left; overflow : auto;
+	color: white;
+	font-family: klavika, arial;
+	margin-top: 0px;
+	font-size: 20px;
+	overflow: auto;
+}
+
+#image {
+	max-width: 92%;
+	max-height: auto;
+	margin-right: 10px;
+}
 </style>
 </head>
 <body>
-	<div id="title"><h1 id="text"> Liste des participants</h1></div>
-	<div><img id="image2" src="" alt=""/></div>
-	<div><table>
-		<tr th:each="user : ${users}">
-			<td th:text="${user.name}">Name</td>
-		</tr>
-	</table></div>
-	<div id="share"><h2>URL to share</h2></div>
-	<div><a th:href="${url}" th:text="${url}">link</a></div>
+	<div id="clients" style="width: 70%">
+		<h1>Liste des participants</h1>
+		<table id="myTable">
+		</table>
+		<h2>URL to share</h2>
+		<a th:href="${url}" th:text="${url}">link</a>
+	</div>
+	<div id="detail" style="width: 30%">
+		<h2 id="title" th:text="${event.title}"></h2>
+		<img id="image" th:src="${event.image}" alt="" />
+		<h3 id="placename" th:text="${event.placeName}"></h3>
+		<p id="description" th:text="${event.description}"></p>
+	</div>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+    	var users = [[${users}]];
+		for (var i = 0; i < users.length; i++) {
+		    var table = document.getElementById("myTable");
+		    var row = table.insertRow(i);
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="eventsScript.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;callback=initMap&amp;key=AIzaSyBt74Hr5wZkB7oafjj6fYprlGnRJ4TZd8c"></script>
-
+		    var imgCell = row.insertCell(0);
+		    var img = document.createElement('img');
+		    img.src = users[i].picture;
+		    imgCell.appendChild(img);
+		    
+		    var nameCell = row.insertCell(1);
+		    nameCell.innerHTML = users[i].name;
+		    
+		}
+		/*]]>*/ 
+	</script>
 </body>
 </html>

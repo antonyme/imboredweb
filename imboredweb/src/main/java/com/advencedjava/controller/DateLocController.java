@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.advencedjava.api.dto.Datum;
 import com.advencedjava.api.dto.SearchResult;
@@ -33,7 +34,7 @@ public class DateLocController {
 	@SuppressWarnings({ "deprecation" })
 	private DateTime date = new DateTime(new Date(2016, 12, 15));
 	private UserLocation userLocation = new UserLocation(43.524360, 5.445613);
-	private User user = new User("id","name");
+	private User user = new User("id","name", "https://scontent.xx.fbcdn.net/v/t1.0-1/c15.0.50.50/p50x50/10354686_10150004552801856_220367501106153455_n.jpg?oh=61d2ef0908c4e9ea88e64dcd066685fb&oe=58E9C72F");
 	private List<EventInfo> events;
 	
 
@@ -95,13 +96,15 @@ public class DateLocController {
 	}
 	
 	@PostMapping("/events")
-	public String events(@ModelAttribute("eventChoosen") EventInfo eventInfo) {
+	public String events(@ModelAttribute("eventChoosen") EventInfo eventInfo,
+			final RedirectAttributes attributes) {
 		for (EventInfo event : events) {
 			if(event.getEventUid() == eventInfo.getEventUid()) {
 				eventInfo = event;
 			}
 		}
+		attributes.addFlashAttribute("user", user);
 		UUID groupUid = manager.addGroup(new GroupController(eventInfo));
-		return "redirect:/group/" + groupUid + "/user/" + user.getFbId() + "/" + user.getName();
+		return "redirect:/group/" + groupUid + "/create";
 	}
 }

@@ -15,7 +15,7 @@ public class TestController {
 	
 	@GetMapping("/test")
 	public String test(Model model) {
-		users.add(new User("13424", "ZDOINicoein iozjfo"));
+		users.add(new User("13424", "ZDOINicoein iozjfo", "url"));
 		model.addAttribute("users", users);
 		model.addAttribute("url", "http://localhost:8080/group");
 		return "test";

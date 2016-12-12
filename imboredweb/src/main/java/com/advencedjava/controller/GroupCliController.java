@@ -21,6 +21,7 @@ public class GroupCliController {
 	@Autowired
 	private GroupsManagerController manager;
 	private GroupController group;
+	@SuppressWarnings("unused")
 	private User user;
 	
 	@GetMapping("/group/{groupUid}")
@@ -33,18 +34,14 @@ public class GroupCliController {
 	@PostMapping("/group/home")
 	public String postConnect(@ModelAttribute User user) {
 		this.user = user;
-		System.out.println("user " + user.getName() + " created");
 		group.addUser(user);
 		return "redirect:/group";
 	}
 	
-	@GetMapping("/group/{groupUid}/user/{userId}/{userName}")
-	public String joinEvent(@PathVariable UUID groupUid,
-			@PathVariable String userId,
-			@PathVariable String userName) {
+	@GetMapping("/group/{groupUid}/create")
+	public String joinEvent(@PathVariable UUID groupUid, @ModelAttribute("user") User user) {
 		group = manager.getGroup(groupUid);
-		user = new User(userId, userName);
-		System.out.println("user " + userName + " created");
+		this.user = user;
 		group.addUser(user);
 		return "redirect:/group";
 	}
@@ -54,6 +51,7 @@ public class GroupCliController {
 		System.out.println("user list size " + group.getUsers().size());
 		model.addAttribute("users", group.getUsers());
 		model.addAttribute("url", "http://localhost:8080/group/" + group.getUid().toString());
+		model.addAttribute("event", group.getEventInfo());
 		return "group";
 	}
 }
