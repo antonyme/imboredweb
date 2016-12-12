@@ -1,7 +1,8 @@
 package com.advencedjava.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,12 +32,17 @@ public class DateLocController {
 	
 	@Autowired
 	private GroupsManagerController manager;
-	@SuppressWarnings({ "deprecation" })
-	private DateTime date = new DateTime(new Date(2016, 12, 15));
+	private DateTime date;
 	private UserLocation userLocation = new UserLocation(43.524360, 5.445613);
 	private User user = new User("id","name", "https://scontent.xx.fbcdn.net/v/t1.0-1/c15.0.50.50/p50x50/10354686_10150004552801856_220367501106153455_n.jpg?oh=61d2ef0908c4e9ea88e64dcd066685fb&oe=58E9C72F");
 	private List<EventInfo> events;
 	
+	public DateLocController() {
+		try {
+			date = new DateTime((new SimpleDateFormat("dd/MM/yyyy")).parse("12/12/2016"));
+		} catch (ParseException e) {}
+		
+	}
 
 	@GetMapping("/home")
 	public String getHome(Model m) {
@@ -93,6 +99,13 @@ public class DateLocController {
         	}
         }
         return events;
+	}
+	
+	@GetMapping("/no-event")
+	public String noEvent(Model model) {
+		String msg = "Pas d'évènement trouvé.\nRéessaye peut-être?";
+		model.addAttribute("message", msg);
+		return "no-event";
 	}
 	
 	@PostMapping("/events")

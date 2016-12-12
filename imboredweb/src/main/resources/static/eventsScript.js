@@ -16,6 +16,9 @@ function initMap() {
 function createEventMarkers(data) {
 	markers = new Array();
 	var bounds = new google.maps.LatLngBounds();
+	if(data.length == 0) {
+		window.location = "/no-event"
+	}
 	data.forEach(function(eventInfo) {
 		if(!isMarked(eventInfo.lat, eventInfo.lng)) {
 			// Create a marker for each event.
