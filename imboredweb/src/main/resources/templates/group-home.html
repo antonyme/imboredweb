@@ -63,9 +63,10 @@
 		function facebookInit() {
 			FB.Event.subscribe('auth.authResponseChange', function(response) {
 				if (response.status === 'connected') {
-					FB.api('/me', {fields: 'id, name'}, function(response) {
+					FB.api('/me', {fields: 'id, name, picture'}, function(response) {
 						document.getElementById("id").value = response.id;
 						document.getElementById("name").value = response.name;
+						document.getElementById("picture").value = response.picture.data.url;
 						document.getElementById("form").submit();
 					});
 				}
@@ -77,6 +78,7 @@
 	<form id="form" th:action="@{/group/home}" th:object="${user}" method="post">
 		<input id="id" type="hidden" th:field="*{fbId}" />
 		<input id="name" type="hidden" th:field="*{name}" />
+		<input id="picture" type="hidden" th:field="*{picture}" />
 	</form>
     <div id="logo"><p> I'm bored®</p></div>
     
