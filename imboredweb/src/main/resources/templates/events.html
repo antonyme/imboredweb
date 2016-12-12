@@ -8,54 +8,46 @@ html, body {
 	height: 100%;
 	padding: 0;
 	margin: 0;
+	
 }
-
-body {
-	background-color: rgb(30, 126, 174);
+body{
+background-color: rgb(30,126,174);
 }
-
 #left, #map, #separation, #detail {
 	float: left;
-}
-
+} 
 #main-title {
 	width: 100%;
 	height: 5%;
 }
-
-#map {
+#map{
 	height: 90%
 }
-
 #separation {
-	height: 1%
+	height:1%
 }
-
 #map {
 	margin-left: 15px;
 	border-width: medium;
-	border-style: solid;
-	border-color: rgb(59, 89, 152);
+		border-style: solid;
+		border-color: rgb(59,89,152);
 }
-
 #left, #detail {
 	height: 100%;
 }
-
 #detail {
 	overflow: auto;
 	color: white;
-	font-family: klavika, arial;
-	margin-top: 0px;
-	font-size: 20px;
+    font-family:klavika,arial;
+    margin-top: 0px;
+    font-size: 20px;
 }
+#image{
 
-#image {
-	max-width: 92%;
-	max-height: auto;
-	margin-right: 10px;
+max-width:92%;
+max-height:auto;
+margin-right: 10px;
 }
-<<<<<<< HEAD
  #main-title{
     color: white;
     font-family:klavika,arial;
@@ -89,49 +81,25 @@ border-top-color: rgb(140,193,128);
   border-left-style: solid;
   height:33px;
   }
-=======
-
-#main-title {
-	color: white;
-	font-family: klavika, arial;
-	margin-top: 10px;
-	margin-left: 1em;
-	font-size: 20px;
-}
-
-#submitBtn {
-	margin-top: 5px;
-	margin-right: 5px;
-	margin-bottom: 10px;
-	width: 90%;
-	background-color: rgb(101, 170, 83);
-	border-width: thin;
-	border-top-color: rgb(140, 193, 128);
-	border-right-color: rgb(140, 193, 128);
-	border-bottom-color: rgb(140, 193, 128);
-	border-left-color: rgb(140, 193, 128);
-	color: white;
-	border-top-style: solid;
-	border-right-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	height: 33px;
-}
->>>>>>> refs/heads/local
+  #description{
+  font-style: italic;
+  }
+  #address{
+  font-size: 10px;
+  font-style: italic;
+  }
 </style>
 </head>
 <body>
 	<div id="left" style="width: 70%;">
-		<div id="main-title">
-			<header>Click on the events!</header>
-		</div>
+		<div id="main-title"><header>Click on the events!</header></div>
 		<div id="map" style="width: 95%;"></div>
 		<div id="separation" style="width: 5%;"></div>
 	</div>
 	<div id="detail" style="width: 30%; display: none">
 		<h2 id="title"></h2>
-		<img id="image" src="" alt="" />
-		<h3 id="placename"></h3>
+		<img id="image" src="" alt=""/>
+		<p id="placename"></p>
 		<p id="description"></p>
 		<p id="address"></p>
 		<p id="description_long"></p>
@@ -140,11 +108,9 @@ border-top-color: rgb(140,193,128);
 			<button id="submitBtn" type="submit">Valider</button>
 		</form>
 	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="eventsScript.js"></script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;callback=initMap&amp;key=AIzaSyBt74Hr5wZkB7oafjj6fYprlGnRJ4TZd8c"></script>
 </body>
 </html>
-
