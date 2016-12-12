@@ -6,21 +6,22 @@
 <style>
 body {
 	height: 100%;
-	width: 100%;
-	color: white;
+	width: 100%; color : white;
 	font-family: klavika, arial;
 	margin-top: 0px;
 	font-size: 20px;
 	background-color: rgb(30, 126, 174);
+	color: white;
 }
+
 #detail, #clients {
 	height: 100;
-	float: left;
-	overflow: auto;
+	float: left; overflow : auto;
 	color: white;
 	font-family: klavika, arial;
 	margin-top: 0px;
 	font-size: 20px;
+	overflow: auto;
 }
 
 #image {
@@ -33,11 +34,7 @@ body {
 <body>
 	<div id="clients" style="width: 70%">
 		<h1>Liste des participants</h1>
-		<table>
-			<tr th:each="user : ${users}">
-				<td th:text="${user.name}">Name</td>
-				<td th:text="${user.picture}">Picture</td>
-			</tr>
+		<table id="myTable">
 		</table>
 		<h2>URL to share</h2>
 		<a th:href="${url}" th:text="${url}">link</a>
@@ -48,5 +45,23 @@ body {
 		<h3 id="placename" th:text="${event.placeName}"></h3>
 		<p id="description" th:text="${event.description}"></p>
 	</div>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+    	var users = [[${users}]];
+		for (var i = 0; i < users.length; i++) {
+		    var table = document.getElementById("myTable");
+		    var row = table.insertRow(i);
+
+		    var imgCell = row.insertCell(0);
+		    var img = document.createElement('img');
+		    img.src = users[i].picture;
+		    imgCell.appendChild(img);
+		    
+		    var nameCell = row.insertCell(1);
+		    nameCell.innerHTML = users[i].name;
+		    
+		}
+		/*]]>*/ 
+	</script>
 </body>
 </html>
