@@ -4,6 +4,7 @@ package com.advencedjava.api.dto;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,7 +20,7 @@ public class FreeText implements Serializable
 {
 
     @JsonProperty("fr")
-    private Object fr;
+    private String fr;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 8557976060391689001L;
@@ -30,7 +31,7 @@ public class FreeText implements Serializable
      *     The fr
      */
     @JsonProperty("fr")
-    public Object getFr() {
+    public String getFr() {
         return fr;
     }
 
@@ -40,8 +41,8 @@ public class FreeText implements Serializable
      *     The fr
      */
     @JsonProperty("fr")
-    public void setFr(Object fr) {
-        this.fr = fr;
+    public void setFr(String fr) {
+        this.fr =  fr;
     }
 
     @JsonAnyGetter

@@ -55,6 +55,14 @@ margin-right: 10px;
     margin-left: 1em;
     font-size: 20px;
      }
+     #description_long{
+     color: white;
+    font-family:klavika,arial;
+    margin-top: 10px;
+    margin-right: 4em;
+    font-size: 10px;
+    width: 90%;
+     }
      #submitBtn{
 margin-top: 5px;
 margin-right: 5px;
@@ -86,6 +94,8 @@ border-top-color: rgb(140,193,128);
 		<img id="image" src="" alt=""/>
 		<h3 id="placename"></h3>
 		<p id="description"></p>
+		<p id="address"></p>
+		<p id="description_long"></p>
 		<form th:action="@{/events}" th:object="${eventInfo}" method="post">
 			<input id="eventuid" type="hidden" th:field="*{eventUid}" />
 			<button id="submitBtn" type="submit">Valider</button>

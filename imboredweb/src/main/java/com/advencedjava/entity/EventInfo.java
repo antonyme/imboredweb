@@ -14,6 +14,7 @@ public class EventInfo {
 	String image;
 	String title;
 	String description;
+	String freeText;
 	
 	//location
 	String placeName;
@@ -65,6 +66,14 @@ public class EventInfo {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public String getFreeText() {
+		return freeText;
+	}
+
+	public void setFreeText(String freeText) {
+		this.freeText = freeText;
+	}
+
 
 	public String getPlaceName() {
 		return placeName;
@@ -130,6 +139,7 @@ public class EventInfo {
 			if(title.isEmpty()) return false;
 			
 			this.description = jsonData.getDescription().getFr();
+			this.freeText =  jsonData.getFreeText().getFr();
 			
 			this.placeName = jsonData.getLocations().get(0).getPlacename();
 			

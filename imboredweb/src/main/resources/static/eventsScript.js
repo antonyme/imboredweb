@@ -48,6 +48,9 @@ function markerClicked(eventInfo) {
 	}
 	document.getElementById("placename").innerHTML = eventInfo.placeName;
 	document.getElementById("description").innerHTML = eventInfo.description;
+	document.getElementById("description_long").innerHTML = eventInfo.freeText;
+	document.getElementById("address").innerHTML = eventInfo.address;
+    
 	document.getElementById("eventuid").value = eventInfo.eventUid;
 }
 
