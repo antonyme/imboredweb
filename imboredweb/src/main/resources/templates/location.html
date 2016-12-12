@@ -11,8 +11,11 @@ html, body {
 }
 
 #map {
+    padding-top: 10px;
 	height: 90%;
-	margin: 60;
+	border-width: medium;
+		border-style: solid;
+		border-color: rgb(59,89,152);
 }
 
 .controls {
@@ -25,6 +28,13 @@ html, body {
 	outline: none;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
+  #text{
+      color: white;
+    font-family:klavika,arial;
+    margin: 0px 0px 0px 50px;
+    
+    font-size: 20px;
+     }
 
 #pac-input {
 	background-color: #fff;
@@ -32,7 +42,7 @@ html, body {
 	font-size: 15px;
 	font-weight: 300;
 	margin-left: 12px;
-	padding: 0 11px 0 13px;
+	padding: 0px 11px 0 13px;
 	text-overflow: ellipsis;
 	width: 300px;
 }
@@ -56,19 +66,43 @@ html, body {
 	font-size: 13px;
 	font-weight: 300;
 }
+#submitBtn{
+margin-top: 0px;
+margin-bottom: 10px;
+width:100%;
+ background-color: rgb(101,170,83);
+border-width: thin ;
+border-top-color: rgb(140,193,128);
+  border-right-color: rgb(140,193,128);
+  border-bottom-color: rgb(140,193,128);
+  border-left-color: rgb(140,193,128);
+  color: white;
+    border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  height:33px;
+  }
 </style>
-<title>Places Searchbox</title>
+<title>Find your events</title>
 <style>
 #target {
 	width: 345px;
 }
+body{
+background-color: rgb(30,126,174);
+}
 </style>
 </head>
 <body>
+
+
+	
 	<input id="pac-input" class="controls" type="text"
-		placeholder="Search Box" />
+		placeholder="Where do you want to have fun?" />
 
 	<div id="map"></div>
+	
 	<div id="bottom">
 		<form th:action="@{/location}" th:object="${location}" method="post">
 			<input id="lat" type="hidden" th:field="*{lat}" />
