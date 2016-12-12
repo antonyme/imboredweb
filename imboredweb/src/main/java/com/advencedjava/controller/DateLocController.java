@@ -103,7 +103,7 @@ public class DateLocController {
 	
 	@GetMapping("/no-event")
 	public String noEvent(Model model) {
-		String msg = "Pas d'évènement trouvé.\nRéessaye peut-être?";
+		String msg = "I'm sorry but you will have to search on another day!";
 		model.addAttribute("message", msg);
 		return "no-event";
 	}

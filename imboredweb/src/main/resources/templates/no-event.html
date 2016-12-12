@@ -12,11 +12,34 @@ html, body {
 }
 body{
 background-color: rgb(30,126,174);
+ text-align: center;
+ font-size:25px;
+ color: white;
+ font-family:klavika,arial;
+}
+#redirect{
+  background-color: rgb(101,170,83);
+border-width: thin ;
+border-top-color: rgb(140,193,128);
+  border-right-color: rgb(140,193,128);
+  border-bottom-color: rgb(140,193,128);
+  border-left-color: rgb(140,193,128);
+  color: white;
+    border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  width:100px;
+  height:33px;
+ }
+#ops{
+font-size:55px;
 }
 </style>
 </head>
 <body>
+<p id="ops"> Ooooops!</p>
 <p th:text="${message}"></p>
-<button onclick="location.href = '/date';" id="redirect" class="float-left submit-button" >Réessayer!</button>
+<button onclick="location.href = '/date';" id="redirect" class="float-left submit-button" >Try again!!</button>
 </body>
 </html>
