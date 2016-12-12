@@ -1,9 +1,12 @@
 package com.advencedjava.entity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import com.advencedjava.api.dto.Datum;
+import com.advencedjava.util.Util;
 
 public class EventInfo {
 	int eventUid;
@@ -122,7 +125,7 @@ public class EventInfo {
 	 * @param jsonData object created automatically from JSON
 	 * @return false if jsonData isn't valid.
 	 */
-	public Boolean fill(Datum jsonData) {
+	public Boolean fill(Datum jsonData, Date dateChoosen) {
 		try {
 			//needed
 			this.eventUid = Integer.parseInt(jsonData.getUid());
@@ -154,10 +157,14 @@ public class EventInfo {
 			this.lng = Double.parseDouble(jsonData.getLocations().get(0).getLongitude());
 			
 			//needed
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd/hh:mm:ss");
-			String toParse = jsonData.getLocations().get(0).getDates().get(0).getDate() + "/"
-					+ jsonData.getLocations().get(0).getDates().get(0).getTimeStart();
-			this.startDate = formatter.parse(toParse);
+			List<com.advencedjava.api.dto.Date> dates = jsonData.getLocations().get(0).getDates();
+			for(com.advencedjava.api.dto.Date datesElem : dates) {
+				Date date = parse(datesElem.getDate() + "/" + datesElem.getTimeStart());
+				if(date.after(dateChoosen) && date.before(Util.addDays(dateChoosen, 5))) {
+					this.startDate = date;
+					break;
+				}
+			}
 			
 			return true;
 		} catch (Exception e) {
@@ -165,4 +172,10 @@ public class EventInfo {
 			return false;
 		}
 	}
+	
+	private Date parse(String toParse) throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd/hh:mm:ss");
+		return formatter.parse(toParse);
+	}
+	
 }

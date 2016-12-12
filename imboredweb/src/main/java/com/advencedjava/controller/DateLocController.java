@@ -94,7 +94,7 @@ public class DateLocController {
         events = new ArrayList<>(); 
         for(Datum event : result.getData()) {
         	EventInfo eventInfo = new EventInfo();
-        	if(eventInfo.fill(event)) {
+        	if(eventInfo.fill(event, date.getDate())) {
         		events.add(eventInfo);
         	}
         }

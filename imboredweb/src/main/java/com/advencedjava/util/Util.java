@@ -11,8 +11,8 @@ public class Util {
 	
 	public static String buildOpenAgendaURL(double lat, double lng, Date date) {
 		if (FULL_ACCESS){
-			SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
-			String url = URL_FULL + "&lat=" + lat + "&lng=" + lng + "&radius=1000" + "&date=" + format.format(date) + "-" + format.format(addDays(date, 5));
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			String url = URL_FULL + "&lat=" + lat + "&lng=" + lng + "&radius=2000" + "&when=" + format.format(date) + "-" + format.format(addDays(date, 5));
 			System.out.println(url);
 			return url;
 		}
