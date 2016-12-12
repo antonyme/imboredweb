@@ -30,7 +30,7 @@ public class DateLocController {
 	
 	@Autowired
 	private GroupsManagerController manager;
-	@SuppressWarnings({ "deprecation", "unused" })
+	@SuppressWarnings({ "deprecation" })
 	private DateTime date = new DateTime(new Date(2016, 12, 15));
 	private UserLocation userLocation = new UserLocation(43.524360, 5.445613);
 	private User user = new User("id","name");
@@ -82,9 +82,8 @@ public class DateLocController {
 	@GetMapping("/events-info")
 	public @ResponseBody List<EventInfo> eventsLocation() {
 		RestTemplate restTemplate = new RestTemplate();
-        SearchResult result = restTemplate.getForObject(
-        		Util.buildOpenAgendaURL(userLocation.getLat(), userLocation.getLng()), SearchResult.class);
-        
+		String url = Util.buildOpenAgendaURL(userLocation.getLat(), userLocation.getLng(), date.getDate());
+        SearchResult result = restTemplate.getForObject(url, SearchResult.class);
         events = new ArrayList<>(); 
         for(Datum event : result.getData()) {
         	EventInfo eventInfo = new EventInfo();

@@ -1,10 +1,31 @@
 package com.advencedjava.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Util {
-	private final static String URL_OPENAGENDA_API = "https://api.openagenda.com/v1/agendas/7454155/events?";
-	private final static String KEY_OPENAGENDA = "s89Zf831m52LgHMNCUTWfVdNHte8VUtG";
+	private final static String URL_FULL = "https://api.openagenda.com/v1/events?key=s89Zf831m52LgHMNCUTWfVdNHte8VUtG";
+	private final static String URL_AGENDA = "https://api.openagenda.com/v1/agendas/24882772/events?limit=20&key=s89Zf831m52LgHMNCUTWfVdNHte8VUtG";
+	private final static Boolean FULL_ACCESS = false; 
 	
-	public static String buildOpenAgendaURL(double lat, double lng) {
-		return URL_OPENAGENDA_API + "lat=" + lat + "&lng=" + lng + "&radius=1000&key=" + KEY_OPENAGENDA;
+	public static String buildOpenAgendaURL(double lat, double lng, Date date) {
+		if (FULL_ACCESS){
+			SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+			String url = URL_FULL + "&lat=" + lat + "&lng=" + lng + "&radius=1000" + "&date=" + format.format(date) + "-" + format.format(addDays(date, 5));
+			System.out.println(url);
+			return url;
+		}
+		else {
+			return URL_AGENDA;
+		}
 	}
+	
+    public static Date addDays(Date date, int days)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, days); //minus number would decrement the days
+        return cal.getTime();
+    }
 }

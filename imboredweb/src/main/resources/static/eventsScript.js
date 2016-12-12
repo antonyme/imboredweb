@@ -40,7 +40,12 @@ function createEventMarkers(data) {
 function markerClicked(eventInfo) {
 	document.getElementById("detail").style.display="block";
 	document.getElementById("title").innerHTML = eventInfo.title;
-	document.getElementById("image").src = eventInfo.image;
+	if(eventInfo.image != null) {
+		document.getElementById("image").src = eventInfo.image;
+	}
+	else {
+		document.getElementById("image").style.display="none";
+	}
 	document.getElementById("placename").innerHTML = eventInfo.placeName;
 	document.getElementById("description").innerHTML = eventInfo.description;
 	document.getElementById("eventuid").value = eventInfo.eventUid;

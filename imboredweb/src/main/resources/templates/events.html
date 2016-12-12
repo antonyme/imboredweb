@@ -6,22 +6,37 @@
 <style>
 html, body {
 	height: 100%;
-	margin: 10px 10px 10px 10px;
 	padding: 0;
+	margin: 0;
 }
-
-#map {
-	height: 90%;
-	margin: 60;
+#left, #map, #separation, #detail {
+	float: left;
+} 
+#main-title {
+	width: 100%;
+	height: 15%;
+}
+#map, #separation {
+	height: 85%
+}
+#left, #detail {
+	height: 100%;
+}
+#detail {
+	overflow: auto;
 }
 </style>
 </head>
 <body>
-	<div id="map" style="float: left; width: 70%;"></div>
-	<div id="detail" style="float: left; width: 30%; display: none">
-		<h1 id="title"></h1>
-		<img id="image" src="" alt="W3Schools.com"/>
-		<h2 id="placename"></h2>
+	<div id="left" style="width: 70%;">
+		<div id="main-title"><header>T'as plus qu'a choisir un évènement qui t'enjaille!</header></div>
+		<div id="map" style="width: 95%;"></div>
+		<div id="separation" style="width: 5%;"></div>
+	</div>
+	<div id="detail" style="width: 30%; display: none">
+		<h2 id="title"></h2>
+		<img id="image" src="" alt=""/>
+		<h3 id="placename"></h3>
 		<p id="description"></p>
 		<form th:action="@{/events}" th:object="${eventInfo}" method="post">
 			<input id="eventuid" type="hidden" th:field="*{eventUid}" />
