@@ -34,7 +34,9 @@ public class GroupCliController {
 	@PostMapping("/group/home")
 	public String postConnect(@ModelAttribute User user) {
 		this.user = user;
-		group.addUser(user);
+		if(group.isNew(user)) {
+			group.addUser(user);
+		}
 		return "redirect:/group";
 	}
 	

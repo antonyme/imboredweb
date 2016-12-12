@@ -41,4 +41,13 @@ public class GroupController {
 	public void setEventInfo(EventInfo eventInfo) {
 		this.eventInfo = eventInfo;
 	}
+	
+	public Boolean isNew(User newUser) {
+		for(User user : userList) {
+			if(user.getFbId().equals(newUser.getFbId())) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
