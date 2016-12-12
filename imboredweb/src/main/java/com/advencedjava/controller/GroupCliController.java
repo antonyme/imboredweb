@@ -48,7 +48,6 @@ public class GroupCliController {
 	
 	@GetMapping("/group")
 	public String group(Model model) {
-		System.out.println("user list size " + group.getUsers().size());
 		model.addAttribute("users", group.getUsers());
 		model.addAttribute("url", "http://localhost:8080/group/" + group.getUid().toString());
 		model.addAttribute("event", group.getEventInfo());

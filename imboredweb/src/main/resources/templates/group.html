@@ -44,6 +44,9 @@ body {
 		<img id="image" th:src="${event.image}" alt="" />
 		<h3 id="placename" th:text="${event.placeName}"></h3>
 		<p id="description" th:text="${event.description}"></p>
+		<p id="date" th:text="${event.freeText}"></p>
+		<p id="address" th:text="${event.address}"></p>
+		<p id="description_long" th:text="${event.startDate}"></p>
 	</div>
 	<script th:inline="javascript">
 		/*<![CDATA[*/
