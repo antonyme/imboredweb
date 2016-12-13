@@ -2,6 +2,8 @@ package com.advencedjava.controller;
 
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -49,9 +51,9 @@ public class GroupCliController {
 	}
 	
 	@GetMapping("/group")
-	public String group(Model model) {
+	public String group(Model model, HttpServletRequest request) {
 		model.addAttribute("users", group.getUsers());
-		model.addAttribute("url", "http://localhost:8080/group/" + group.getUid().toString());
+		model.addAttribute("url", request.getRequestURL().toString() + "/" + group.getUid().toString());
 		model.addAttribute("event", group.getEventInfo());
 		return "group";
 	}

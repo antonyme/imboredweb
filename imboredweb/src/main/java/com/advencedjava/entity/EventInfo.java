@@ -160,12 +160,14 @@ public class EventInfo {
 			List<com.advencedjava.api.dto.Date> dates = jsonData.getLocations().get(0).getDates();
 			for(com.advencedjava.api.dto.Date datesElem : dates) {
 				Date date = parse(datesElem.getDate() + "/" + datesElem.getTimeStart());
-				if(date.after(dateChoosen) && date.before(Util.addDays(dateChoosen, 5))) {
+				if(Util.addDays(date, -1).after(dateChoosen) && date.before(Util.addDays(dateChoosen, 6))) {
 					this.startDate = date;
 					break;
 				}
 			}
-			
+			if(startDate == null) {
+				throw new IllegalArgumentException("No corresponding date for event :" + eventUid);
+			}
 			return true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
