@@ -33,7 +33,7 @@ public class DateLocController {
 	@Autowired
 	private GroupsManagerController manager;
 	private DateTime date;
-	private UserLocation userLocation = new UserLocation(43.524360, 5.445613);
+	private UserLocation userLocation = new UserLocation(43.5, 5.45);
 	private User user = new User("id","name", "https://scontent.xx.fbcdn.net/v/t1.0-1/c15.0.50.50/p50x50/10354686_10150004552801856_220367501106153455_n.jpg?oh=61d2ef0908c4e9ea88e64dcd066685fb&oe=58E9C72F");
 	private List<EventInfo> events;
 	
@@ -44,6 +44,11 @@ public class DateLocController {
 		
 	}
 
+	@GetMapping("/")
+	public String redirect() {
+		return "redirect:/home";
+	}
+	
 	@GetMapping("/home")
 	public String getHome(Model m) {
 		m.addAttribute("user", new User());
@@ -102,10 +107,13 @@ public class DateLocController {
 	}
 	
 	@GetMapping("/no-event")
-	public String noEvent(Model model) {
-		String msg = "I'm sorry but you will have to search on another day!";
-		model.addAttribute("message", msg);
+	public String noEvent() {
 		return "no-event";
+	}
+	
+	@GetMapping("/error")
+	public String error() {
+		return "error";
 	}
 	
 	@PostMapping("/events")
