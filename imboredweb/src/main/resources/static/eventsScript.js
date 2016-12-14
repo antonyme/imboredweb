@@ -10,7 +10,7 @@ function initMap() {
 		zoom : 13,
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	});
-	$.get("events-info", createEventMarkers);
+	$.get("events-info", createEventMarkers).fail(function(){alert("Ooops! The open agenda API, used to fetch events, doesn't seem to work right now.")});
 }
 
 function createEventMarkers(data) {
